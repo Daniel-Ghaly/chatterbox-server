@@ -1,5 +1,6 @@
 var Parse = {
 
+  // eslint-disable-next-line quotes
   server: `http://127.0.0.1:3000/classes/messages`,
 
   create: function(message, successCB, errorCB = null) {
@@ -19,6 +20,7 @@ var Parse = {
   readAll: function(successCB, errorCB = null) {
     $.ajax({
       url: Parse.server,
+      crossDomain: true,
       type: 'GET',
       contentType: 'application/json',
       success: successCB,
