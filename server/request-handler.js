@@ -34,18 +34,24 @@ var requestHandler = function(request, response) {
 
 
   if (request.method === 'GET' && request.url === '/classes/messages') {
-    // console.log(request.method);
+    // console.log('getTest');
     response.writeHead(200, headers);
     response.end(JSON.stringify(messages));
     // have an array of objects and want to return it
+  // } else if (request.method === 'OPTION' && request.url === '/classes/messages') {
+    // headers['Allow'] = POST;
   } else if (request.method === 'POST' && request.url === '/classes/messages') {
-
+    console.log('test');
     request.on('data', (chunk) => {
-      response.writeHead(200, headers);
+      console.log(chunk);
+      response.writeHead(201, headers);
       var message = JSON.parse(chunk);
-      messages.push(chunk);
+      messages.push(message);
+      response.end('post recieved');
     });
-    response.end();
+  } else {
+    response.writeHead(404, headers);
+    response.end('404 not found');
   }
 
 
